@@ -149,4 +149,5 @@ if (!isNil "dayZ_serverName") then {
 		((uiNamespace getVariable "wm_disp") displayCtrl 1) ctrlSetText dayZ_serverName;
 	};
 };
-//[] execVM "faction.sqf";
+[] execVM "debug\addmarkers.sqf";
+[] execVM "debug\addmarkers75.sqf";
