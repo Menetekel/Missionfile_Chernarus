@@ -17,7 +17,7 @@ spawnShoremode = 0; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
 MaxVehicleLimit = 250; // Default = 50
-MaxDynamicDebris = 500; // Default = 100
+MaxDynamicDebris = 100; // Default = 100
 dayz_MapArea = 10000; // Default = 10000
 dayz_animalDistance = 400;
 dayz_zSpawnDistance = 600;
@@ -27,7 +27,7 @@ dayz_maxGlobalZombiesIncrease = 5;
 dayz_maxZeds = 200;
 dayz_sellDistance = 35;
 
-dayz_paraSpawn = false;
+dayz_paraSpawn = false;		// DOT NOT ENABLE currently bugged in Epoch
 spawnMarkerCount = 4; // Default: 4
 dayz_maxAnimals = 8; // Default: 8
 dayz_tameDogs = false;
