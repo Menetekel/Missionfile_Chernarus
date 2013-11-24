@@ -26,13 +26,14 @@ dayz_maxGlobalZombiesInit = 10;
 dayz_maxGlobalZombiesIncrease = 5;
 dayz_maxZeds = 200;
 dayz_sellDistance = 35;
-
 dayz_paraSpawn = false;		// DOT NOT ENABLE currently bugged in Epoch
 spawnMarkerCount = 4; // Default: 4
 dayz_maxAnimals = 8; // Default: 8
 dayz_tameDogs = false;
 DynamicVehicleDamageLow = 15; // Default: 0
 DynamicVehicleDamageHigh = 90; // Default: 100
+DZE_BuildingLimit = 300; //Max buildings within 30m
+
 
 EpochEvents = [
 ["any","any","any","any",30,"crash_spawner"],
@@ -102,6 +103,7 @@ if (isServer) then {
 	call compile preprocessFileLineNumbers "skaronator\dynamic_vehicle.sqf";				//Compile vehicle configs
 	// Add trader citys
 	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
+	vfats =[6] spawn compile preprocessFile ('germandayz\time_srv.sqf'); //even time multiplier 2-24 16x and 8x seem to work best
 	/* CUSTOM STUFF SKARONATOR START */
 	_skaro = [] execVM "skaronator\map\trader.sqf";
 	/* CUSTOM STUFF SKARONATOR END */
@@ -138,8 +140,10 @@ if (!isDedicated) then {
 		
 	//Lights
 	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
-};
+	vfats =[] spawn compile preprocessFile ('germandayz\time_clt.sqf');
+	};
 //#include "\z\addons\dayz_code\system\REsec.sqf"
+//GD EDITS
 dayZ_serverName = "GD-RD3";
 if (!isNil "dayZ_serverName") then {
 	[] spawn {
