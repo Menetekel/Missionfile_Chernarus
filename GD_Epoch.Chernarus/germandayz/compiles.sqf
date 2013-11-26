@@ -834,8 +834,6 @@ control_zombieAgent = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\c
 	} else {
 		eh_localCleanup = {};
 	};
+execVM "germandayz\DynamicWeatherEffects.sqf";
 	
-	
-	//Start Dynamic Weather
-	execVM "skaronator\clientfiles\DynamicWeatherEffects.sqf";
 	initialized = true;

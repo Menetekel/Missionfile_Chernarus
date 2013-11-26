@@ -53,7 +53,7 @@ progressLoadingScreen 0.2;
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\setup_functions_med.sqf";
 progressLoadingScreen 0.4;
 //EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\compiles.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "skaronator\clientfiles\compiles.sqf";
+call compile preprocessFileLineNumbers "germandayz\compiles.sqf";
 progressLoadingScreen 0.5;
 call compile preprocessFileLineNumbers "germandayz\server_traders.sqf";				//Compile trader configs
 progressLoadingScreen 1.0;
