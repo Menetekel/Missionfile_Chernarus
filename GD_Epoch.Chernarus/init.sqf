@@ -17,7 +17,7 @@ spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
 MaxVehicleLimit = 250; // Default = 50
-MaxDynamicDebris = 100; // Default = 100
+MaxDynamicDebris = 50; // Default = 100
 dayz_MapArea = 10000; // Default = 10000
 dayz_animalDistance = 200;
 dayz_zSpawnDistance = 600;
