@@ -44,16 +44,16 @@ EpochEvents = [
 dayz_fullMoonNights = true;
 
 //Load in compiled functions
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "skaronator\clientfiles\variables.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";  // Aenderung Andro
+//call compile preprocessFileLineNumbers "skaronator\clientfiles\variables.sqf";
 progressLoadingScreen 0.1;
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\publicEH.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "skaronator\clientfiles\publicEH.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\publicEH.sqf";  // Aenderung Andro
+//call compile preprocessFileLineNumbers "skaronator\clientfiles\publicEH.sqf";
 progressLoadingScreen 0.2;
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\setup_functions_med.sqf";
 progressLoadingScreen 0.4;
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\compiles.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "skaronator\clientfiles\compiles.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\compiles.sqf";  // Aenderung Andro
+//call compile preprocessFileLineNumbers "skaronator\clientfiles\compiles.sqf";
 progressLoadingScreen 0.5;
 call compile preprocessFileLineNumbers "germandayz\server_traders.sqf";				//Compile trader configs
 progressLoadingScreen 1.0;
@@ -105,7 +105,7 @@ if (isServer) then {
 	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
 	_skaro = [] execVM "germandayz\trader.sqf";
 };
-//	_skaro = [] execVM "germandayz\safezone\safezone.sqf";
+	_skaro = [] execVM "germandayz\safezone\safezone.sqf";
 	//Clear Zeds
 	[[4063.4226, 11664.19, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Bash
 	[[11447.472, 11364.504, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Klen
@@ -125,7 +125,7 @@ if (!isDedicated) then {
 	fn_gearMenuChecks = compile preprocessFileLineNumbers "skaronator\clientfiles\fn_gearMenuChecks.sqf";
 	fnc_usec_selfActions =	compile preprocessFileLineNumbers "skaronator\clientfiles\fn_selfActions.sqf";
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
-	_skaro = [] execVM "germandayz\playerUI_effects.sqf";
+//off for testing	_skaro = [] execVM "germandayz\playerUI_effects.sqf";
 	_skaro = [] execVM "germandayz\refuel\refuel_selfActions.sqf";
 	//Overwrite compiles.sqf //SKARONATOR
 	/* CUSTOM STUFF SKARONATOR END */

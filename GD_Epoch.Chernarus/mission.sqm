@@ -116,7 +116,7 @@ class Mission
 	class Intel
 	{
 		briefingName="DayZ Epoch Chernarus";
-		briefingDescription="DayZ Epoch Chernarus Skaronator.com Server";
+		briefingDescription="GermanDayZ.de RedDiamond Epoch Server";
 		startWeather=0.067362607;
 		forecastWeather=0.52341133;
 		year=2008;
@@ -7643,7 +7643,7 @@ class Mission
 			azimut=-160.94701;
 			id=702;
 			side="EMPTY";
-			vehicle="MAP_a_stationhouse";
+			vehicle="Land_a_stationhouse";
 			skill=1;
 		};
 		class Item501
