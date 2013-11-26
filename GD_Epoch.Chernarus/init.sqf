@@ -103,9 +103,9 @@ if (isServer) then {
 	call compile preprocessFileLineNumbers "germandayz\dynamic_vehicle.sqf";				//Compile vehicle configs
 	// Add trader citys
 	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
-	_skaro = [] execVM "germandayz\trader.sqf";
+	_gdepoch = [] execVM "germandayz\trader.sqf";
 };
-//	_skaro = [] execVM "germandayz\safezone\safezone.sqf";
+	_gdepoch = [] execVM "germandayz\safezone\safezone.sqf";
 	//Clear Zeds
 	[[4063.4226, 11664.19, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Bash
 	[[11447.472, 11364.504, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Klen
