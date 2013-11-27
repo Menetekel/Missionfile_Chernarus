@@ -14,4 +14,4 @@
 #include "R3F_LOG\fr_strings_lang.sqf"
 #endif
 
-STR_R3F_ARTY_LOG_nom_produit = "[R3F] Artillery and Logistic";
+STR_R3F_ARTY_LOG_nom_produit = "[R3F] by GermanDayZ.de";
