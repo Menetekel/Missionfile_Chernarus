@@ -146,4 +146,6 @@ if (!isNil "dayZ_serverName") then {
 };
 
 // Logistics Area
-[] execVM "germandayz\R3F\init.sqf"														// R3F Logistics Limited Towing/Lifting/Cargo - See \R3F_LOG\config.sqf
+[] execVM "germandayz\R3F\init.sqf"
+[] execVM "germandayz\missions\addmarkers.sqf";
+[] execVM "germandayz\missions\addmarkers75.sqf";
