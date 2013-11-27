@@ -13,6 +13,8 @@ debriefing = 0;
 
 onPauseScript = "";
 loadScreen = "germandayz\load.jpg";
+//germandayz.de
+#include "germandayz\R3F\desc_include.h"
 
 class Header
 {
@@ -181,5 +183,6 @@ class RscTitles {
                                 text="";
                         };
                 };
+#include "germandayz\R3F\desc_rsct_include.h"
         };
 };

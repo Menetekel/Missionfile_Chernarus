@@ -144,3 +144,6 @@ if (!isNil "dayZ_serverName") then {
 		((uiNamespace getVariable "wm_disp") displayCtrl 1) ctrlSetText dayZ_serverName;
 	};
 };
+
+// Logistics Area
+[] execVM "germandayz\R3F\init.sqf"														// R3F Logistics Limited Towing/Lifting/Cargo - See \R3F_LOG\config.sqf
