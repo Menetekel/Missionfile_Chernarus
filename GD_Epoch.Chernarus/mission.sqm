@@ -30,7 +30,7 @@ class Mission
 	class Intel
 	{
 		briefingName="DayZ Epoch Chernarus";
-		briefingDescription="DayZ Epoch Chernarus Skaronator.com Server";
+		briefingDescription="GermanDayZ.de RedDiamond Epoch";
 		startWeather=0.067362607;
 		forecastWeather=0.52341133;
 		year=2008;
