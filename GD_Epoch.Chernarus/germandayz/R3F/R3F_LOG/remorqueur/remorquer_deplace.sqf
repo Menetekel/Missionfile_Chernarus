@@ -20,7 +20,7 @@ else
 	
 	_objet = R3F_LOG_joueur_deplace_objet;
 	
-	_remorqueur = nearestObjects [_objet, R3F_LOG_CFG_remorqueurs, 5]; //distance around vehicle for vehicles to be towed
+	_remorqueur = nearestObjects [_objet, R3F_LOG_CFG_remorqueurs, 6]; //distance around vehicle for vehicles to be towed -Star
 	// Parce que le remorqueur peut être un objet remorquable
 	_remorqueur = _remorqueur - [_objet];
 	
