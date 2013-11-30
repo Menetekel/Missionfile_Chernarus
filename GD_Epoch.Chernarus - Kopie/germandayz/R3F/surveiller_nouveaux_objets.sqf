@@ -15,7 +15,7 @@
 // Attente fin briefing
 sleep 0.1;
 
-private ["_liste_objets_depl_heli_remorq_transp", "_liste_vehicules_connus", "_liste_vehicules", "_count_liste_vehicules", "_i", "_objet"];
+private ["_liste_objets_depl_heli_remorq_transp", "_liste_vehicules_connus", "_liste_vehicules", "_count_liste_vehicules", "_i", "_object"];
 
 #ifdef R3F_LOG_enable
 // Union des tableaux de types d'objets servant dans un isKindOf
@@ -39,57 +39,57 @@ while {true} do
 			// On parcoure tout les véhicules présents dans le jeu en 18 secondes
 			for [{_i = 0}, {_i < _count_liste_vehicules}, {_i = _i + 1}] do
 			{
-				_objet = _liste_vehicules select _i;
+				_object = _liste_vehicules select _i;
 				
 				#ifdef R3F_LOG_enable
 				// Si l'objet est un objet déplaçable/héliportable/remorquable/transportable
-				if ({_objet isKindOf _x} count _liste_objets_depl_heli_remorq_transp > 0) then
+				if ({_object isKindOf _x} count _liste_objets_depl_heli_remorq_transp > 0) then
 				{
-					[_objet] spawn R3F_LOG_FNCT_objet_init;
+					[_object] spawn R3F_LOG_FNCT_objet_init;
 				};
 				
 				// Si l'objet est un véhicule héliporteur
-				if ({_objet isKindOf _x} count R3F_LOG_CFG_heliporteurs > 0) then
+				if ({_object isKindOf _x} count R3F_LOG_CFG_heliporteurs > 0) then
 				{
-					[_objet] spawn R3F_LOG_FNCT_heliporteur_init;
+					[_object] spawn R3F_LOG_FNCT_heliporteur_init;
 				};
 				
 				// Si l'objet est un véhicule remorqueur
-				if ({_objet isKindOf _x} count R3F_LOG_CFG_remorqueurs > 0) then
+				if ({_object isKindOf _x} count R3F_LOG_CFG_remorqueurs > 0) then
 				{
-					[_objet] spawn R3F_LOG_FNCT_remorqueur_init;
+					[_object] spawn R3F_LOG_FNCT_remorqueur_init;
 				};
 				
 				// Si l'objet est un véhicule remorqueur
-				if ({_objet isKindOf _x} count R3F_LOG_classes_transporteurs > 0) then
+				if ({_object isKindOf _x} count R3F_LOG_classes_transporteurs > 0) then
 				{
-					[_objet] spawn R3F_LOG_FNCT_transporteur_init;
+					[_object] spawn R3F_LOG_FNCT_transporteur_init;
 				};
 				#endif
 				
 				#ifdef R3F_ARTY_enable
 				// Si l'objet est un pièce d'artillerie d'un type à gérer
-				if ({_objet isKindOf _x} count R3F_ARTY_CFG_pieces_artillerie > 0) then
+				if ({_object isKindOf _x} count R3F_ARTY_CFG_pieces_artillerie > 0) then
 				{
-					[_objet] spawn R3F_ARTY_FNCT_piece_init;
+					[_object] spawn R3F_ARTY_FNCT_piece_init;
 				};
 				
 				// Si l'objet doit mettre à disposition un calculateur d'artillerie depuis l'intérieur
-				if ({_objet isKindOf _x} count R3F_ARTY_CFG_calculateur_interne > 0) then
+				if ({_object isKindOf _x} count R3F_ARTY_CFG_calculateur_interne > 0) then
 				{
-					_objet addAction [("<t color=""#dddd00"">" + STR_R3F_ARTY_action_ouvrir_dlg_SM + "</t>"), "germandayz\R3F\R3F_ARTY\poste_commandement\ouvrir_dlg_saisie_mission.sqf", nil, 6, false, true, "", "vehicle player == _target"];
+					_object addAction [("<t color=""#dddd00"">" + STR_R3F_ARTY_action_ouvrir_dlg_SM + "</t>"), "germandayz\R3F\R3F_ARTY\poste_commandement\ouvrir_dlg_saisie_mission.sqf", nil, 6, false, true, "", "vehicle player == _target"];
 				};
 				
 				// Si l'objet doit mettre à disposition un calculateur d'artillerie depuis l'intérieur
-				if ({_objet isKindOf _x} count R3F_ARTY_CFG_calculateur_externe > 0) then
+				if ({_object isKindOf _x} count R3F_ARTY_CFG_calculateur_externe > 0) then
 				{
-					_objet addAction [("<t color=""#dddd00"">" + STR_R3F_ARTY_action_ouvrir_dlg_SM + "</t>"), "germandayz\R3F\R3F_ARTY\poste_commandement\ouvrir_dlg_saisie_mission.sqf", nil, 6, true, true, "", "vehicle player == player"];
+					_object addAction [("<t color=""#dddd00"">" + STR_R3F_ARTY_action_ouvrir_dlg_SM + "</t>"), "germandayz\R3F\R3F_ARTY\poste_commandement\ouvrir_dlg_saisie_mission.sqf", nil, 6, true, true, "", "vehicle player == player"];
 				};
 				
 				// Si c'est un calculateur
-				if (typeOf _objet == "SatPhone") then
+				if (typeOf _object == "SatPhone") then
 				{
-					[_objet] spawn R3F_ARTY_FNCT_calculateur_init;
+					[_object] spawn R3F_ARTY_FNCT_calculateur_init;
 				};
 				#endif
 				

@@ -17,10 +17,10 @@ else
 	R3F_LOG_mutex_local_verrou = true;
 	
 	#include "dlg_constantes.h"
-	private ["_transporteur", "_objets_charges", "_type_objet_a_decharger", "_objet_a_decharger", "_i"];
+	private ["_towingvehicle", "_objets_charges", "_type_objet_a_decharger", "_objet_a_decharger", "_i"];
 	
-	_transporteur = uiNamespace getVariable "R3F_LOG_dlg_CV_transporteur";
-	_objets_charges = _transporteur getVariable "R3F_LOG_objets_charges";
+	_towingvehicle = uiNamespace getVariable "R3F_LOG_dlg_CV_transporteur";
+	_objets_charges = _towingvehicle getVariable "R3F_LOG_objets_charges";
 	
 	_type_objet_a_decharger = lbData [R3F_LOG_IDC_dlg_CV_liste_contenu, lbCurSel R3F_LOG_IDC_dlg_CV_liste_contenu];
 	
@@ -40,7 +40,7 @@ else
 	{
 		// On mémorise sur le réseau le nouveau contenu du transporteur (càd avec cet objet en moins)
 		_objets_charges = _objets_charges - [_objet_a_decharger];
-		_transporteur setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
+		_towingvehicle setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
 		
 		detach _objet_a_decharger;
 		
@@ -53,24 +53,24 @@ else
 			private ["_dimension_max"];
 			_dimension_max = (((boundingBox _objet_a_decharger select 1 select 1) max (-(boundingBox _objet_a_decharger select 0 select 1))) max ((boundingBox _objet_a_decharger select 1 select 0) max (-(boundingBox _objet_a_decharger select 0 select 0))));
 			
-			player globalChat STR_R3F_LOG_action_decharger_en_cours;
+			player globalChat Tow_settings_action_decharger_en_cours;
 			
 			sleep 2;
 			
 			// On pose l'objet au hasard vers l'arrière du transporteur
 			_objet_a_decharger setPos [
-				(getPos _transporteur select 0) - ((_dimension_max+5+(random 10)-(boundingBox _transporteur select 0 select 1))*sin (getDir _transporteur - 90+random 180)),
-				(getPos _transporteur select 1) - ((_dimension_max+5+(random 10)-(boundingBox _transporteur select 0 select 1))*cos (getDir _transporteur - 90+random 180)),
+				(getPos _towingvehicle select 0) - ((_dimension_max+5+(random 10)-(boundingBox _towingvehicle select 0 select 1))*sin (getDir _towingvehicle - 90+random 180)),
+				(getPos _towingvehicle select 1) - ((_dimension_max+5+(random 10)-(boundingBox _towingvehicle select 0 select 1))*cos (getDir _towingvehicle - 90+random 180)),
 				0
 			];
 			_objet_a_decharger setVelocity [0, 0, 0];
 			
-			player globalChat STR_R3F_LOG_action_decharger_fait;
+			player globalChat Tow_settings_action_decharger_fait;
 		};
 	}
 	else
 	{
-		player globalChat STR_R3F_LOG_action_decharger_deja_fait;
+		player globalChat Tow_settings_action_decharger_deja_fait;
 	};
 	
 	R3F_LOG_mutex_local_verrou = false;

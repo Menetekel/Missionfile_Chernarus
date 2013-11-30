@@ -18,6 +18,8 @@ spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
 MaxVehicleLimit = 300; // Default = 50
 MaxDynamicDebris = 0; // Default = 100
+MaxAmmoBoxes = 0; // Default = 5
+MaxMineVeins = 0; // Default = 50
 dayz_MapArea = 10000; // Default = 10000
 dayz_animalDistance = 200;
 dayz_zSpawnDistance = 600;
@@ -145,7 +147,10 @@ if (!isNil "dayZ_serverName") then {
 	};
 };
 
-// Logistics Area
-[] execVM "germandayz\R3F\init.sqf"
+// Random Stuff
+[] execVM "germandayz\R3F\init.sqf";
 [] execVM "germandayz\missions\addmarkers.sqf";
 [] execVM "germandayz\missions\addmarkers75.sqf";
+//Map Additions
+[] execVM "germandayz\map\nwa.sqf";
+[] execVM "germandayz\map\west_kamenka.sqf";

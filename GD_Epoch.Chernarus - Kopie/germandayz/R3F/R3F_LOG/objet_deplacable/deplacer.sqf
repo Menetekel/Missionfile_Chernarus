@@ -21,22 +21,22 @@ else
 	
 	R3F_LOG_objet_selectionne = objNull;
 	
-	private ["_objet", "_est_calculateur", "_arme_principale", "_action_menu", "_azimut_canon"];
+	private ["_object", "_est_calculateur", "_arme_principale", "_action_menu", "_azimut_canon"];
 	
-	_objet = _this select 0;
+	_object = _this select 0;
 	
 	// Si l'objet est un calculateur d'artillerie, on laisse le script spécialisé gérer
-	_est_calculateur = _objet getVariable "R3F_ARTY_est_calculateur";
+	_est_calculateur = _object getVariable "R3F_ARTY_est_calculateur";
 	if !(isNil "_est_calculateur") then
 	{
 		R3F_LOG_mutex_local_verrou = false;
-		[_objet] execVM "germandayz\R3F\R3F_ARTY\poste_commandement\deplacer_calculateur.sqf";
+		[_object] execVM "germandayz\R3F\R3F_ARTY\poste_commandement\deplacer_calculateur.sqf";
 	}
 	else
 	{
-		_objet setVariable ["R3F_LOG_est_deplace_par", player, true];
+		_object setVariable ["R3F_LOG_beingmoved", player, true];
 		
-		R3F_LOG_joueur_deplace_objet = _objet;
+		R3F_LOG_joueur_deplace_objet = _object;
 		
 		// Sauvegarde et retrait de l'arme primaire
 		_arme_principale = primaryWeapon player;
@@ -52,28 +52,28 @@ else
 		if (!alive player) then
 		{
 			R3F_LOG_joueur_deplace_objet = objNull;
-			_objet setVariable ["R3F_LOG_est_deplace_par", objNull, true];
+			_object setVariable ["R3F_LOG_beingmoved", objNull, true];
 			// Car attachTo de "charger" positionne l'objet en altitude :
-			_objet setPos [getPos _objet select 0, getPos _objet select 1, 0];
-			_objet setVelocity [0, 0, 0];
+			_object setPos [getPos _object select 0, getPos _object select 1, 0];
+			_object setVelocity [0, 0, 0];
 			
 			R3F_LOG_mutex_local_verrou = false;
 		}
 		else
 		{
-			_objet attachTo [player, [
+			_object attachTo [player, [
 				0,
-				(((boundingBox _objet select 1 select 1) max (-(boundingBox _objet select 0 select 1))) max ((boundingBox _objet select 1 select 0) max (-(boundingBox _objet select 0 select 0)))) + 1,
+				(((boundingBox _object select 1 select 1) max (-(boundingBox _object select 0 select 1))) max ((boundingBox _object select 1 select 0) max (-(boundingBox _object select 0 select 0)))) + 1,
 				1]
 			];
 			
-			if (count (weapons _objet) > 0) then
+			if (count (weapons _object) > 0) then
 			{
 				// Le canon doit pointer devant nous (sinon on a l'impression de se faire empaler)
-				_azimut_canon = ((_objet weaponDirection (weapons _objet select 0)) select 0) atan2 ((_objet weaponDirection (weapons _objet select 0)) select 1);
+				_azimut_canon = ((_object weaponDirection (weapons _object select 0)) select 0) atan2 ((_object weaponDirection (weapons _object select 0)) select 1);
 				
 				// On est obligé de demander au serveur de tourner le canon pour nous
-				R3F_ARTY_AND_LOG_PUBVAR_setDir = [_objet, (getDir _objet)-_azimut_canon];
+				R3F_ARTY_AND_LOG_PUBVAR_setDir = [_object, (getDir _object)-_azimut_canon];
 				if (isServer) then
 				{
 					["R3F_ARTY_AND_LOG_PUBVAR_setDir", R3F_ARTY_AND_LOG_PUBVAR_setDir] spawn R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir;
@@ -86,7 +86,7 @@ else
 			
 			R3F_LOG_mutex_local_verrou = false;
 			
-			_action_menu = player addAction [("<t color=""#dddd00"">" + STR_R3F_LOG_action_relacher_objet + "</t>"), "germandayz\R3F\R3F_LOG\objet_deplacable\relacher.sqf", nil, 5, true, true];
+			_action_menu = player addAction [("<t color=""#dddd00"">" + Tow_settings_action_relacher_objet + "</t>"), "germandayz\R3F\R3F_LOG\objet_deplacable\relacher.sqf", nil, 5, true, true];
 			
 			// On limite la vitesse de marche et on interdit de monter dans un véhicule tant que l'objet est porté
 			while {!isNull R3F_LOG_joueur_deplace_objet && alive player} do
@@ -109,14 +109,14 @@ else
 			};
 			
 			// L'objet n'est plus porté, on le repose
-			detach _objet;
-			_objet setPos [getPos _objet select 0, getPos _objet select 1, 0];
-			_objet setVelocity [0, 0, 0];
+			detach _object;
+			_object setPos [getPos _object select 0, getPos _object select 1, 0];
+			_object setVelocity [0, 0, 0];
 			
 			player removeAction _action_menu;
 			R3F_LOG_joueur_deplace_objet = objNull;
 			
-			_objet setVariable ["R3F_LOG_est_deplace_par", objNull, true];
+			_object setVariable ["R3F_LOG_beingmoved", objNull, true];
 			
 			// Restauration de l'arme primaire
 			if (alive player && _arme_principale != "") then
