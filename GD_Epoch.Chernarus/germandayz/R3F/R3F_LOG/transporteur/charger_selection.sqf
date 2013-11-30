@@ -18,18 +18,18 @@ else
 {
 	R3F_LOG_mutex_local_verrou = true;
 	
-	private ["_objet", "_classes_transporteurs", "_transporteur", "_i"];
+	private ["_object", "_classes_transporteurs", "_towingvehicle", "_i"];
 	
-	_objet = R3F_LOG_objet_selectionne;
-	_transporteur = _this select 0;
+	_object = R3F_LOG_objet_selectionne;
+	_towingvehicle = _this select 0;
 	
-	if (!(isNull _objet) && !(_objet getVariable "R3F_LOG_disabled")) then
+	if (!(isNull _object) && !(_object getVariable "R3F_LOG_disabled")) then
 	{
-		if (isNull (_objet getVariable "R3F_LOG_est_transporte_par") && (isNull (_objet getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet getVariable "R3F_LOG_est_deplace_par")))) then
+		if (isNull (_object getVariable "R3F_LOG_beingtransported") && (isNull (_object getVariable "R3F_LOG_beingmoved") || (!alive (_object getVariable "R3F_LOG_beingmoved")))) then
 		{
 			private ["_objets_charges", "_chargement_actuel", "_cout_capacite_objet", "_chargement_maxi"];
 			
-			_objets_charges = _transporteur getVariable "R3F_LOG_objets_charges";
+			_objets_charges = _towingvehicle getVariable "R3F_LOG_objets_charges";
 			
 			// Calcul du chargement actuel
 			_chargement_actuel = 0;
@@ -47,7 +47,7 @@ else
 			_cout_capacite_objet = 99999;
 			for [{_i = 0}, {_i < count R3F_LOG_CFG_objets_transportables}, {_i = _i + 1}] do
 			{
-				if (_objet isKindOf (R3F_LOG_CFG_objets_transportables select _i select 0)) exitWith
+				if (_object isKindOf (R3F_LOG_CFG_objets_transportables select _i select 0)) exitWith
 				{
 					_cout_capacite_objet = (R3F_LOG_CFG_objets_transportables select _i select 1);
 				};
@@ -57,7 +57,7 @@ else
 			_chargement_maxi = 0;
 			for [{_i = 0}, {_i < count R3F_LOG_CFG_transporteurs}, {_i = _i + 1}] do
 			{
-				if (_transporteur isKindOf (R3F_LOG_CFG_transporteurs select _i select 0)) exitWith
+				if (_towingvehicle isKindOf (R3F_LOG_CFG_transporteurs select _i select 0)) exitWith
 				{
 					_chargement_maxi = (R3F_LOG_CFG_transporteurs select _i select 1);
 				};
@@ -66,13 +66,13 @@ else
 			// Si l'objet loge dans le véhicule
 			if (_chargement_actuel + _cout_capacite_objet <= _chargement_maxi) then
 			{
-				if (_objet distance _transporteur <= 30) then
+				if (_object distance _towingvehicle <= 30) then
 				{
 					// On mémorise sur le réseau le nouveau contenu du véhicule
-					_objets_charges = _objets_charges + [_objet];
-					_transporteur setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
+					_objets_charges = _objets_charges + [_object];
+					_towingvehicle setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
 					
-					player globalChat STR_R3F_LOG_action_charger_selection_en_cours;
+					player globalChat Tow_settings_action_charger_selection_en_cours;
 					
 					sleep 2;
 					
@@ -86,25 +86,25 @@ else
 						_nb_tirage_pos = _nb_tirage_pos + 1;
 					};
 					
-					_objet attachTo [R3F_LOG_PUBVAR_point_attache, _position_attache];
+					_object attachTo [R3F_LOG_PUBVAR_point_attache, _position_attache];
 					
 					R3F_LOG_objet_selectionne = objNull;
 					
-					player globalChat format [STR_R3F_LOG_action_charger_selection_fait, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+					player globalChat format [Tow_settings_action_charger_selection_fait, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 				}
 				else
 				{
-					player globalChat format [STR_R3F_LOG_action_charger_selection_trop_loin, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+					player globalChat format [Tow_settings_action_charger_selection_trop_loin, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 				};
 			}
 			else
 			{
-				player globalChat STR_R3F_LOG_action_charger_selection_pas_assez_de_place;
+				player globalChat Tow_settings_action_charger_selection_pas_assez_de_place;
 			};
 		}
 		else
 		{
-			player globalChat format [STR_R3F_LOG_action_charger_selection_objet_transporte, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+			player globalChat format [Tow_settings_action_charger_selection_objet_transporte, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 		};
 	};
 	

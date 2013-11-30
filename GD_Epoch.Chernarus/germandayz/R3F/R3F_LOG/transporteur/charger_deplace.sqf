@@ -16,23 +16,23 @@ else
 {
 	R3F_LOG_mutex_local_verrou = true;
 	
-	private ["_objet", "_classes_transporteurs", "_transporteur", "_i"];
+	private ["_object", "_classes_transporteurs", "_towingvehicle", "_i"];
 	
-	_objet = R3F_LOG_joueur_deplace_objet;
+	_object = R3F_LOG_joueur_deplace_objet;
 	
-	_transporteur = nearestObjects [_objet, R3F_LOG_classes_transporteurs, 22];
+	_towingvehicle = nearestObjects [_object, R3F_LOG_classes_transporteurs, 22];
 	// Parce que le transporteur peut être un objet transportable
-	_transporteur = _transporteur - [_objet];
+	_towingvehicle = _towingvehicle - [_object];
 	
-	if (count _transporteur > 0) then
+	if (count _towingvehicle > 0) then
 	{
-		_transporteur = _transporteur select 0;
+		_towingvehicle = _towingvehicle select 0;
 		
-		if (alive _transporteur && ([0,0,0] distance velocity _transporteur < 6) && (getPos _transporteur select 2 < 2) && !(_transporteur getVariable "R3F_LOG_disabled")) then
+		if (alive _towingvehicle && ([0,0,0] distance velocity _towingvehicle < 6) && (getPos _towingvehicle select 2 < 2) && !(_towingvehicle getVariable "R3F_LOG_disabled")) then
 		{
 			private ["_objets_charges", "_chargement_actuel", "_cout_capacite_objet", "_chargement_maxi"];
 			
-			_objets_charges = _transporteur getVariable "R3F_LOG_objets_charges";
+			_objets_charges = _towingvehicle getVariable "R3F_LOG_objets_charges";
 			
 			// Calcul du chargement actuel
 			_chargement_actuel = 0;
@@ -50,7 +50,7 @@ else
 			_cout_capacite_objet = 99999;
 			for [{_i = 0}, {_i < count R3F_LOG_CFG_objets_transportables}, {_i = _i + 1}] do
 			{
-				if (_objet isKindOf (R3F_LOG_CFG_objets_transportables select _i select 0)) exitWith
+				if (_object isKindOf (R3F_LOG_CFG_objets_transportables select _i select 0)) exitWith
 				{
 					_cout_capacite_objet = (R3F_LOG_CFG_objets_transportables select _i select 1);
 				};
@@ -60,7 +60,7 @@ else
 			_chargement_maxi = 0;
 			for [{_i = 0}, {_i < count R3F_LOG_CFG_transporteurs}, {_i = _i + 1}] do
 			{
-				if (_transporteur isKindOf (R3F_LOG_CFG_transporteurs select _i select 0)) exitWith
+				if (_towingvehicle isKindOf (R3F_LOG_CFG_transporteurs select _i select 0)) exitWith
 				{
 					_chargement_maxi = (R3F_LOG_CFG_transporteurs select _i select 1);
 				};
@@ -70,10 +70,10 @@ else
 			if (_chargement_actuel + _cout_capacite_objet <= _chargement_maxi) then
 			{
 				// On mémorise sur le réseau le nouveau contenu du véhicule
-				_objets_charges = _objets_charges + [_objet];
-				_transporteur setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
+				_objets_charges = _objets_charges + [_object];
+				_towingvehicle setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
 				
-				player globalChat STR_R3F_LOG_action_charger_deplace_en_cours;
+				player globalChat Tow_settings_action_charger_deplace_en_cours;
 				
 				// Faire relacher l'objet au joueur (si il l'a dans "les mains")
 				R3F_LOG_joueur_deplace_objet = objNull;
@@ -89,13 +89,13 @@ else
 					_nb_tirage_pos = _nb_tirage_pos + 1;
 				};
 				
-				_objet attachTo [R3F_LOG_PUBVAR_point_attache, _position_attache];
+				_object attachTo [R3F_LOG_PUBVAR_point_attache, _position_attache];
 				
-				player globalChat format [STR_R3F_LOG_action_charger_deplace_fait, getText (configFile >> "CfgVehicles" >> (typeOf _transporteur) >> "displayName")];
+				player globalChat format [Tow_settings_action_charger_deplace_fait, getText (configFile >> "CfgVehicles" >> (typeOf _towingvehicle) >> "displayName")];
 			}
 			else
 			{
-				player globalChat STR_R3F_LOG_action_charger_deplace_pas_assez_de_place;
+				player globalChat Tow_settings_action_charger_deplace_pas_assez_de_place;
 			};
 		};
 	};

@@ -18,10 +18,10 @@ else
 {
 	R3F_LOG_mutex_local_verrou = true;
 	
-	private ["_remorqueur", "_objet"];
+	private ["_remorqueur", "_object"];
 	
-	_objet = _this select 0;
-	_remorqueur = _objet getVariable "R3F_LOG_est_transporte_par";
+	_object = _this select 0;
+	_remorqueur = _object getVariable "R3F_LOG_beingtransported";
 	
 	// Ne pas permettre de décrocher un objet s'il est porté héliporté
 	if ({_remorqueur isKindOf _x} count R3F_LOG_CFG_remorqueurs > 0) then
@@ -29,33 +29,33 @@ else
 		// On mémorise sur le réseau que le véhicule remorque quelque chose
 		_remorqueur setVariable ["R3F_LOG_remorque", objNull, true];
 		// On mémorise aussi sur le réseau que le objet est attaché en remorque
-		_objet setVariable ["R3F_LOG_est_transporte_par", objNull, true];
+		_object setVariable ["R3F_LOG_beingtransported", objNull, true];
 		
-		detach _objet;
-		_objet setVelocity [0, 0, 0];
+		detach _object;
+		_object setVelocity [0, 0, 0];
 		
 		player playMove "AinvPknlMstpSlayWrflDnon_medic";
 		sleep 7;
 		
-		if ({_objet isKindOf _x} count R3F_LOG_CFG_objets_deplacables > 0) then
+		if ({_object isKindOf _x} count R3F_LOG_CFG_objets_deplacables > 0) then
 		{
 			// Si personne n'a re-remorquer l'objet pendant le sleep 7
 			if (isNull (_remorqueur getVariable "R3F_LOG_remorque") &&
-				(isNull (_objet getVariable "R3F_LOG_est_transporte_par")) &&
-				(isNull (_objet getVariable "R3F_LOG_est_deplace_par"))
+				(isNull (_object getVariable "R3F_LOG_beingtransported")) &&
+				(isNull (_object getVariable "R3F_LOG_beingmoved"))
 			) then
 			{
-				[_objet] execVM "germandayz\R3F\R3F_LOG\objet_deplacable\deplacer.sqf";
+				[_object] execVM "germandayz\R3F\R3F_LOG\objet_deplacable\deplacer.sqf";
 			};
 		}
 		else
 		{
-			player globalChat STR_R3F_LOG_action_detacher_fait;
+			player globalChat Tow_settings_action_detacher_fait;
 		};
 	}
 	else
 	{
-		player globalChat STR_R3F_LOG_action_detacher_impossible_pour_ce_vehicule;
+		player globalChat Tow_settings_action_detacher_impossible_pour_ce_vehicule;
 	};
 	
 	R3F_LOG_mutex_local_verrou = false;

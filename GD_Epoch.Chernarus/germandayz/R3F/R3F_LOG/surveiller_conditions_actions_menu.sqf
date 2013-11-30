@@ -30,8 +30,8 @@ while {true} do
 			{
 				// Condition action deplacer_objet
 				R3F_LOG_action_deplacer_objet_valide = (vehicle player == player && (count crew _objet_pointe == 0) && (isNull R3F_LOG_joueur_deplace_objet) &&
-					(isNull (_objet_pointe getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par"))) &&
-					isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") && !(_objet_pointe getVariable "R3F_LOG_disabled"));
+					(isNull (_objet_pointe getVariable "R3F_LOG_beingmoved") || (!alive (_objet_pointe getVariable "R3F_LOG_beingmoved"))) &&
+					isNull (_objet_pointe getVariable "R3F_LOG_beingtransported") && !(_objet_pointe getVariable "R3F_LOG_disabled"));
 			};
 			
 			// Si l'objet est un objet remorquable
@@ -49,13 +49,13 @@ while {true} do
 				
 				// Condition action selectionner_objet_remorque
 				R3F_LOG_action_selectionner_objet_remorque_valide = (vehicle player == player && (alive _objet_pointe) && (count crew _objet_pointe == 0) &&
-					isNull R3F_LOG_joueur_deplace_objet && isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") &&
-					(isNull (_objet_pointe getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par"))) &&
+					isNull R3F_LOG_joueur_deplace_objet && isNull (_objet_pointe getVariable "R3F_LOG_beingtransported") &&
+					(isNull (_objet_pointe getVariable "R3F_LOG_beingmoved") || (!alive (_objet_pointe getVariable "R3F_LOG_beingmoved"))) &&
 					!(_objet_pointe getVariable "R3F_LOG_disabled"));
 				
 				// Condition action detacher
 				R3F_LOG_action_detacher_valide = (vehicle player == player && (isNull R3F_LOG_joueur_deplace_objet) &&
-					!isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") && !(_objet_pointe getVariable "R3F_LOG_disabled"));
+					!isNull (_objet_pointe getVariable "R3F_LOG_beingtransported") && !(_objet_pointe getVariable "R3F_LOG_disabled"));
 			};
 			
 			// Si l'objet est un objet transportable
@@ -73,8 +73,8 @@ while {true} do
 				
 				// Condition action selectionner_objet_charge
 				R3F_LOG_action_selectionner_objet_charge_valide = (vehicle player == player && (count crew _objet_pointe == 0) &&
-					isNull R3F_LOG_joueur_deplace_objet && isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") &&
-					(isNull (_objet_pointe getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par"))) &&
+					isNull R3F_LOG_joueur_deplace_objet && isNull (_objet_pointe getVariable "R3F_LOG_beingtransported") &&
+					(isNull (_objet_pointe getVariable "R3F_LOG_beingmoved") || (!alive (_objet_pointe getVariable "R3F_LOG_beingmoved"))) &&
 					!(_objet_pointe getVariable "R3F_LOG_disabled"));
 			};
 			

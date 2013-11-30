@@ -20,16 +20,16 @@ else
 {
 	R3F_LOG_mutex_local_verrou = true;
 	
-	private ["_transporteur", "_chargement_actuel", "_chargement_maxi", "_contenu", "_tab_contenu_regroupe"];
+	private ["_towingvehicle", "_chargement_actuel", "_chargement_maxi", "_contenu", "_tab_contenu_regroupe"];
 	private ["_tab_objets", "_tab_quantite", "_i", "_j", "_dlg_contenu_vehicule"];
 	
-	_transporteur = _this select 0;
+	_towingvehicle = _this select 0;
 	
-	uiNamespace setVariable ["R3F_LOG_dlg_CV_transporteur", _transporteur];
+	uiNamespace setVariable ["R3F_LOG_dlg_CV_transporteur", _towingvehicle];
 	
 	createDialog "R3F_LOG_dlg_contenu_vehicule";
 	
-	_contenu = _transporteur getVariable "R3F_LOG_objets_charges";
+	_contenu = _towingvehicle getVariable "R3F_LOG_objets_charges";
 	
 	/** Liste des noms de classe des objets contenu dans le véhicule, sans doublon */
 	_tab_objets = [];
@@ -41,25 +41,25 @@ else
 	// Préparation de la liste du contenu et des quantités associées aux objets
 	for [{_i = 0}, {_i < count _contenu}, {_i = _i + 1}] do
 	{
-		private ["_objet"];
-		_objet = _contenu select _i;
+		private ["_object"];
+		_object = _contenu select _i;
 		
-		if !((typeOf _objet) in _tab_objets) then
+		if !((typeOf _object) in _tab_objets) then
 		{
-			_tab_objets = _tab_objets + [typeOf _objet];
+			_tab_objets = _tab_objets + [typeOf _object];
 			_tab_quantite = _tab_quantite + [1];
 		}
 		else
 		{
 			private ["_idx_objet"];
-			_idx_objet = _tab_objets find (typeOf _objet);
+			_idx_objet = _tab_objets find (typeOf _object);
 			_tab_quantite set [_idx_objet, ((_tab_quantite select _idx_objet) + 1)];
 		};
 		
 		// Ajout de l'objet de le chargement actuel
 		for [{_j = 0}, {_j < count R3F_LOG_CFG_objets_transportables}, {_j = _j + 1}] do
 		{
-			if (_objet isKindOf (R3F_LOG_CFG_objets_transportables select _j select 0)) exitWith
+			if (_object isKindOf (R3F_LOG_CFG_objets_transportables select _j select 0)) exitWith
 			{
 				_chargement_actuel = _chargement_actuel + (R3F_LOG_CFG_objets_transportables select _j select 1);
 			};
@@ -70,7 +70,7 @@ else
 	_chargement_maxi = 0;
 	for [{_i = 0}, {_i < count R3F_LOG_CFG_transporteurs}, {_i = _i + 1}] do
 	{
-		if (_transporteur isKindOf (R3F_LOG_CFG_transporteurs select _i select 0)) exitWith
+		if (_towingvehicle isKindOf (R3F_LOG_CFG_transporteurs select _i select 0)) exitWith
 		{
 			_chargement_maxi = (R3F_LOG_CFG_transporteurs select _i select 1);
 		};

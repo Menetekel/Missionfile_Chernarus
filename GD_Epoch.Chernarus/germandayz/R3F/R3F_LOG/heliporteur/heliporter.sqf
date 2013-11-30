@@ -18,30 +18,30 @@ else
 {
 	R3F_LOG_mutex_local_verrou = true;
 	
-	private ["_heliporteur", "_objet"];
+	private ["_heliporteur", "_object"];
 	
 	_heliporteur = _this select 0;
-	_objet = nearestObjects [_heliporteur, R3F_LOG_CFG_objets_heliportables, 20];
+	_object = nearestObjects [_heliporteur, R3F_LOG_CFG_objets_heliportables, 20];
 	// Parce que l'héliporteur peut être un objet héliportable
-	_objet = _objet - [_heliporteur];
+	_object = _object - [_heliporteur];
 	
-	if (count _objet > 0) then
+	if (count _object > 0) then
 	{
-		_objet = _objet select 0;
+		_object = _object select 0;
 		
-		if !(_objet getVariable "R3F_LOG_disabled") then
+		if !(_object getVariable "R3F_LOG_disabled") then
 		{
-			if (isNull (_objet getVariable "R3F_LOG_est_transporte_par")) then
+			if (isNull (_object getVariable "R3F_LOG_beingtransported")) then
 			{
-				if (count crew _objet == 0) then
+				if (count crew _object == 0) then
 				{
 					// Si l'objet n'est pas en train d'être déplacé par un joueur
-					if (isNull (_objet getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet getVariable "R3F_LOG_est_deplace_par"))) then
+					if (isNull (_object getVariable "R3F_LOG_beingmoved") || (!alive (_object getVariable "R3F_LOG_beingmoved"))) then
 					{
 						private ["_ne_remorque_pas", "_remorque"];
 						// Ne pas héliporter quelque chose qui remorque autre chose
 						_ne_remorque_pas = true;
-						_remorque = _objet getVariable "R3F_LOG_remorque";
+						_remorque = _object getVariable "R3F_LOG_remorque";
 						if !(isNil "_remorque") then
 						{
 							if !(isNull _remorque) then
@@ -53,37 +53,37 @@ else
 						if (_ne_remorque_pas) then
 						{
 							// On mémorise sur le réseau que l'héliporteur remorque quelque chose
-							_heliporteur setVariable ["R3F_LOG_heliporte", _objet, true];
+							_heliporteur setVariable ["R3F_LOG_heliporte", _object, true];
 							// On mémorise aussi sur le réseau que l'objet est attaché à un véhicule
-							_objet setVariable ["R3F_LOG_est_transporte_par", _heliporteur, true];
+							_object setVariable ["R3F_LOG_beingtransported", _heliporteur, true];
 							
 							// Attacher sous l'héliporteur au ras du sol
-							_objet attachTo [_heliporteur, [
+							_object attachTo [_heliporteur, [
 								0,
 								0,
-								(boundingBox _heliporteur select 0 select 2) - (boundingBox _objet select 0 select 2) - (getPos _heliporteur select 2) + 0.5
+								(boundingBox _heliporteur select 0 select 2) - (boundingBox _object select 0 select 2) - (getPos _heliporteur select 2) + 0.5
 							]];
 							
-							player globalChat format [STR_R3F_LOG_action_heliporter_fait, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+							player globalChat format [Tow_settings_action_heliporter_fait, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 						}
 						else
 						{
-							player globalChat format [STR_R3F_LOG_action_heliporter_objet_remorque, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+							player globalChat format [Tow_settings_action_heliporter_objet_remorque, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 						};
 					}
 					else
 					{
-						player globalChat format [STR_R3F_LOG_action_heliporter_deplace_par_joueur, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+						player globalChat format [Tow_settings_action_heliporter_deplace_par_joueur, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 					};
 				}
 				else
 				{
-					player globalChat format [STR_R3F_LOG_action_heliporter_joueur_dans_objet, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+					player globalChat format [Tow_settings_action_heliporter_joueur_dans_objet, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 				};
 			}
 			else
 			{
-				player globalChat format [STR_R3F_LOG_action_heliporter_deja_transporte, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+				player globalChat format [Tow_settings_action_heliporter_deja_transporte, getText (configFile >> "CfgVehicles" >> (typeOf _object) >> "displayName")];
 			};
 		};
 	};

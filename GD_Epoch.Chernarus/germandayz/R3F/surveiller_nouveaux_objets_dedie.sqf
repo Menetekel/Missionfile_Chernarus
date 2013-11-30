@@ -18,7 +18,7 @@
 // Attente fin briefing
 sleep 0.1;
 
-private ["_liste_vehicules_connus", "_liste_vehicules", "_count_liste_vehicules", "_i", "_objet"];
+private ["_liste_vehicules_connus", "_liste_vehicules", "_count_liste_vehicules", "_i", "_object"];
 
 // Contiendra la liste des véhicules (et objets) déjà initialisés
 _liste_vehicules_connus = [];
@@ -34,13 +34,13 @@ while {true} do
 		// On parcoure tout les véhicules présents dans le jeu en 18 secondes
 		for [{_i = 0}, {_i < _count_liste_vehicules}, {_i = _i + 1}] do
 		{
-			_objet = _liste_vehicules select _i;
+			_object = _liste_vehicules select _i;
 			
 			//#ifdef R3F_ARTY_enable // Déjà présent plus haut dans la version actuelle
 			// Si l'objet est un pièce d'artillerie d'un type à gérer
-			if ({_objet isKindOf _x} count R3F_ARTY_CFG_pieces_artillerie > 0) then
+			if ({_object isKindOf _x} count R3F_ARTY_CFG_pieces_artillerie > 0) then
 			{
-				[_objet] spawn R3F_ARTY_FNCT_piece_init_dedie;
+				[_object] spawn R3F_ARTY_FNCT_piece_init_dedie;
 			};
 			//#endif
 			
