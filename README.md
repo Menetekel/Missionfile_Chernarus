@@ -1,7 +1,6 @@
-gd_epoch_Chernarus
 ==================
 
-GermanDayZ Epoch Missionfile zur Nutzung auf den Live Server
+Missionfile zur Nutzung auf den Live Server
 
 
 Notes:
