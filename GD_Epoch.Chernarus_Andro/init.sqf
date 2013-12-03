@@ -46,15 +46,15 @@ EpochEvents = [
 dayz_fullMoonNights = true;
 
 //Load in compiled functions
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";  // Aenderung Andro
+//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\init\variables.sqf";  // Aenderung Andro
 call compile preprocessFileLineNumbers "germandayz\clientfiles\variables.sqf";
 progressLoadingScreen 0.1;
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\publicEH.sqf";  // Aenderung Andro
+//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\init\publicEH.sqf";  // Aenderung Andro
 call compile preprocessFileLineNumbers "germandayz\clientfiles\publicEH.sqf";
 progressLoadingScreen 0.2;
-call compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\setup_functions_med.sqf";
+call compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\medical\setup_functions_med.sqf";
 progressLoadingScreen 0.4;
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\compiles.sqf";  // Aenderung Andro
+//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\init\compiles.sqf";  // Aenderung Andro
 call compile preprocessFileLineNumbers "germandayz\compiles.sqf";
 progressLoadingScreen 0.5;
 call compile preprocessFileLineNumbers "germandayz\server_traders.sqf";				//Compile trader configs
@@ -63,9 +63,9 @@ progressLoadingScreen 1.0;
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
 /* BIS_Effects_* fixes from Dwarden */
-BIS_Effects_EH_Killed = compile preprocessFileLineNumbers "\z\addons\dayz_code\system\BIS_Effects\killed.sqf";
-BIS_Effects_AirDestruction = compile preprocessFileLineNumbers "\z\addons\dayz_code\system\BIS_Effects\AirDestruction.sqf";
-BIS_Effects_AirDestructionStage2 = compile preprocessFileLineNumbers "\z\addons\dayz_code\system\BIS_Effects\AirDestructionStage2.sqf";
+BIS_Effects_EH_Killed = compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\system\BIS_Effects\killed.sqf";
+BIS_Effects_AirDestruction = compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\system\BIS_Effects\AirDestruction.sqf";
+BIS_Effects_AirDestructionStage2 = compile preprocessFileLineNumbers "\z\germandayz\AI\dayz_code\system\BIS_Effects\AirDestructionStage2.sqf";
 
 BIS_Effects_globalEvent = {
 	BIS_effects_gepv = _this;
@@ -104,7 +104,7 @@ if ((!isServer) && (player != player)) then {
 if (isServer) then {
 	call compile preprocessFileLineNumbers "germandayz\dynamic_vehicle.sqf";				//Compile vehicle configs
 	// Add trader citys
-	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
+	_serverMonitor = 	[] execVM "\z\germandayz\AI\dayz_code\system\server_monitor.sqf";
 	_gdepoch = [] execVM "germandayz\trader.sqf";
 };
 	_gdepoch = [] execVM "germandayz\safezone\safezone.sqf";
@@ -126,16 +126,16 @@ if (!isDedicated) then {
 	player_unlockDoor = compile preprocessFileLineNumbers "germandayz\clientfiles\unlockDoor.sqf";
 	fn_gearMenuChecks = compile preprocessFileLineNumbers "germandayz\clientfiles\fn_gearMenuChecks.sqf";
 	fnc_usec_selfActions =	compile preprocessFileLineNumbers "germandayz\clientfiles\fn_selfActions.sqf";
-	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
+	_playerMonitor = 	[] execVM "\z\germandayz\AI\dayz_code\system\player_monitor.sqf";	
 	_skaro = [] execVM "germandayz\playerUI_effects.sqf";
 	_skaro = [] execVM "germandayz\refuel\refuel_selfActions.sqf";
 	//Overwrite compiles.sqf //SKARONATOR
 	/* CUSTOM STUFF SKARONATOR END */
 		
 	//Lights
-	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\germandayz\AI\dayz_code\compile\local_lights_init.sqf";
 	};
-//#include "\z\addons\dayz_code\system\REsec.sqf"
+//#include "\z\germandayz\AI\dayz_code\system\REsec.sqf"
 //GD EDITS
 dayZ_serverName = "GD-RD4";
 if (!isNil "dayZ_serverName") then {

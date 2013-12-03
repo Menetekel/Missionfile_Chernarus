@@ -151,6 +151,10 @@ if (!isNil "dayZ_serverName") then {
 [] execVM "germandayz\R3F\init.sqf";
 [] execVM "germandayz\missions\addmarkers.sqf";
 [] execVM "germandayz\missions\addmarkers75.sqf";
+//[] execVM "germandayz\missions\faction.sqf"; 
 //Map Additions
-[] execVM "germandayz\map\nwa.sqf";
-[] execVM "germandayz\map\west_kamenka.sqf";
+//[] execVM "germandayz\map\nwa.sqf";
+//[] execVM "germandayz\map\west_kamenka.sqf";
+call compile preprocessFileLineNumbers "germandayz\AI\UPSMON\scripts\Init_UPSMON.sqf";
+call compile preprocessfile "germandayz\AI\SHK_pos\shk_pos_init.sqf";
+[] execVM "germandayz\AI\SARGE\SAR_AI_init.sqf";

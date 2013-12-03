@@ -22,63 +22,6 @@ if (!isNull _nearLight) then {
 		_canPickLight = isNull (_nearLight getVariable ["owner",objNull]);
 	};
 };
-// ------------------------------------------------------------------------Andro Self Bloodbag Start------------------------------------------------------------------------
-_mags = magazines player;
-
-    // Krixes Self Bloodbag
-    if ("ItemBloodbag" in _mags and "WoodenArrow" in _mags and "ItemTrashToiletpaper" in _mags and "ItemTrashRazor" in _mags) then {
-        hasBagItemN = true;
-    } else { hasBagItemN = false;};
-    if((speed player <= 1) && hasBagItemN && _canDo) then {
-        if (s_player_selfBloodbagN < 0) then {
-            s_player_selfBloodbagN = player addaction[("<t color='#FFFF00'>" + ("Improvised Self Bloodbag") +"</t>"),"germandayz\selfbloodbag\player_selfbloodbagN.sqf","",5,false,true,"", ""];
-        };
-    } else {
-        player removeAction s_player_selfBloodbagN;
-        s_player_selfBloodbagN = -1;
-    };
-	    if ("ItemBloodbag" in _mags) then {
-        hasBagItem = true;
-    } else { hasBagItem = false;};
-    if((speed player <= 1) && hasBagItem && _canDo) then {
-        if (s_player_selfBloodbag < 0) then {
-            s_player_selfBloodbag = player addaction[("<t color='#FFFF00'>" + ("Self Bloodbag") +"</t>"),"germandayz\selfbloodbag\player_selfbloodbag.sqf","",5,false,true,"", ""];
-        };
-    } else {
-        player removeAction s_player_selfBloodbag;
-        s_player_selfBloodbag = -1;
-    };
-// ------------------------------------------------------------------------Andro Self Bloodbag End------------------------------------------------------------------------
-// ------------------------------------------------------------------------Andro Take Clothes Start------------------------------------------------------------------------
-	if (_isMan and !_isAlive and !_isZombie and !_isAnimal) then {
-    if (s_clothes < 0) then {
-            s_clothes = player addAction [("<t color='#FFFF00'>" + ("Take Clothes") + "</t>"), "germandayz\clothes\clothesr.sqf",cursorTarget, 1, false, true, "",""];
-        };
-    } else {
-        player removeAction s_clothes;
-        s_clothes = -1;
-    };
-	if ((_isMan and !_isAlive and !_isZombie and !_isAnimal) and "ItemTrashRazor" in _mags) then {
-			if (s_clothesr < 0) then {
-					s_clothesr = player addAction [("<t color='#FFFF00'>" + ("Cut Clothes") + "</t>"), "germandayz\clothes\clothes.sqf",cursorTarget, 1, false, true, "",""];
-				};
-    } else {
-        player removeAction s_clothesr;
-        s_clothesr = -1;
-    };
-// ------------------------------------------------------------------------Andro Take Clothes End------------------------------------------------------------------------
-// --------------------Andro Knockout Start-------------------- 
-	_unconscious =    cursorTarget getVariable ["NORRN_unconscious", false];
- 
-    if (_isMan and _isAlive and !_isZombie and _canDo and !_unconscious) then {
-        if (s_player_knockout < 0) then {
-            s_player_knockout = player addAction [("<t color='#FFFF00'>" + ("Knockout!") + "</t>"), "germandayz\knockout\knockout.sqf",cursorTarget, 0, false, true, "",""];
-        };
-    } else {
-        player removeAction s_player_knockout;
-        s_player_knockout = -1;
-    };	
-// --------------------Andro Knockout End-------------------- 
 //Grab Flare
 if (_canPickLight and !dayz_hasLight and !_isPZombie) then {
 	if (s_player_grabflare < 0) then {
@@ -818,16 +761,6 @@ if (!isNull cursorTarget and !_inVehicle and !_isPZombie and (player distance cu
 	s_player_fillfuel = -1;
 	player removeAction s_player_studybody;
 	s_player_studybody = -1;
-	// --------------------Andro Knockout Start-------------------- 
-	player removeAction s_player_knockout;
-	s_player_knockout = -1;
-    // --------------------Andro Knockout End-------------------- 
-	// --------------------Andro Take Clotes Start-------------------- 
-    player removeAction s_clothes;
-    s_clothes = -1;
-	player removeAction s_clothesr;
-    s_clothesr = -1;
-    // --------------------Andro Take Clothes End-------------------- 
 	//Dog
 	player removeAction s_player_tamedog;
 	s_player_tamedog = -1;
