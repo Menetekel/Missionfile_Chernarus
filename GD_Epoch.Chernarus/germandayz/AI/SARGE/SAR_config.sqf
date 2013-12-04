@@ -34,9 +34,9 @@ SAR_DEBUGMONITOR= false;
 // -----------------------------------------------
 
 // maximum number of groups / grid
-SAR_max_grps_bandits = 0;
-SAR_max_grps_soldiers = 0;
-SAR_max_grps_survivors = 0;
+SAR_max_grps_bandits = 4;
+SAR_max_grps_soldiers = 3;
+SAR_max_grps_survivors = 3;
 
 // chance for a group to spawn (1-100)
 SAR_chance_bandits = 80;
@@ -75,7 +75,7 @@ SAR_surv_kill_value = 0;
 SAR_band_kill_value = 0;
 
 // the humanity value below which a player will be considered hostile
-SAR_HUMANITY_HOSTILE_LIMIT = 20000;
+SAR_HUMANITY_HOSTILE_LIMIT = -1000;
 
 // -----------------------------------------------
 // Track and show AI kills in the debug monitor of the player 
