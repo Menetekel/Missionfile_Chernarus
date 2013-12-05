@@ -16,7 +16,7 @@ enableRadio false;
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 MaxHeliCrashes= 5; // Default = 5
-MaxVehicleLimit = 300; // Default = 50
+MaxVehicleLimit = 500; // Default = 50
 MaxDynamicDebris = 0; // Default = 100
 MaxAmmoBoxes = 0; // Default = 5
 MaxMineVeins = 0; // Default = 50
@@ -38,9 +38,9 @@ DZE_BuildingLimit = 300; //Max buildings within 30m
 
 
 EpochEvents = [
-["any","any","any","any",30,"crash_spawner"],
 ["any","any","any","any",0,"crash_spawner"],
-["any","any","any","any",15,"supply_drop"]
+["any","any","any","any",0,"crash_spawner"],
+["any","any","any","any",0,"supply_drop"]
 ];
 
 dayz_fullMoonNights = true;
@@ -127,8 +127,8 @@ if (!isDedicated) then {
 	fn_gearMenuChecks = compile preprocessFileLineNumbers "skaronator\clientfiles\fn_gearMenuChecks.sqf";
 	fnc_usec_selfActions =	compile preprocessFileLineNumbers "skaronator\clientfiles\fn_selfActions.sqf";
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
-	_skaro = [] execVM "germandayz\playerUI_effects.sqf";
-	_skaro = [] execVM "germandayz\refuel\refuel_selfActions.sqf";
+//	_skaro = [] execVM "germandayz\playerUI_effects.sqf";
+//	_skaro = [] execVM "germandayz\refuel\refuel_selfActions.sqf";
 	//Overwrite compiles.sqf //SKARONATOR
 	/* CUSTOM STUFF SKARONATOR END */
 		
