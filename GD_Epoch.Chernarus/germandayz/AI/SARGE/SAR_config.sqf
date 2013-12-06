@@ -511,7 +511,7 @@ SAR_band_leader_weapon_list = ["M4A1","M4A3_CCO_EP1","AK_47_M","M16A2GL","M4A1_A
 SAR_band_leader_pistol_list = [];   
 
 // potential item list for leaders -> Item / Chance 1 - 100
-SAR_band_leader_items = [["ItemSodaCoke",75],["FoodCanBakedBeans",60],["ItemGoldBar10oz",20],["ItemGoldBar10oz",10],["ItemGoldBar10oz",5]];
+SAR_band_leader_items = [["ItemSodaCoke",15],["FoodCanBakedBeans",10],["ItemGoldBar10oz",5]];
 SAR_band_leader_tools =  [["ItemMap",50],["ItemCompass",30],["Binocular_Vector",1],["NVGoggles",2]];
 
 //potential weapon list for riflemen
@@ -519,16 +519,16 @@ SAR_band_rifleman_weapon_list = ["AK_107_kobra","AK_74","AKS_74_kobra","AK_47_M"
 SAR_band_rifleman_pistol_list = [];    
 
 // potential item list for riflemen
-SAR_band_rifleman_items = [["ItemSodaCoke",75],["FoodCanBakedBeans",60],["ItemGoldBar",60],["ItemGoldBar10oz",5]];
+SAR_band_rifleman_items = [["ItemSodaCoke",5],["FoodCanBakedBeans",5],["ItemGoldBar",15],["ItemGoldBar10oz",5]];
 SAR_band_rifleman_tools = [["ItemMap",50],["ItemCompass",30],["Binocular_Vector",1],["NVGoggles",2]];
 
 //potential weapon list for snipers
-SAR_band_sniper_weapon_list = ["SVD_CAMO","M4SPR","LeeEnfield","M14_EP1","M24"];
+SAR_band_sniper_weapon_list = ["M4SPR","LeeEnfield","M14_EP1","M24"];
 SAR_band_sniper_pistol_list = [];   
 
 // potential item list for snipers
-SAR_band_sniper_items = [["ItemSodaCoke",75],["FoodCanBakedBeans",60],["Skin_Sniper1_DZ",20]];
-SAR_band_sniper_tools = [["ItemMap",50],["ItemCompass",30],["Binocular_Vector",1],["ItemFlashlight",80],["NVGoggles",2]];
+SAR_band_sniper_items = [["ItemSodaCoke",5],["FoodCanBakedBeans",5],["Skin_Sniper1_DZ",10]];
+SAR_band_sniper_tools = [["ItemMap",50],["ItemCompass",30],["Binocular_Vector",1],["ItemFlashlight",60],["NVGoggles",2]];
 
 
 // ---------------------------------------------------------------------------------------------------------------------
