@@ -1,1 +1,0 @@
-﻿_l0=ppEffectCreate["colorCorrections",1501];_l0 ppEffectEnable true;_l0 ppEffectAdjust[1,1,0,[0.01,0,0,-0.85],[0.15,0.18,0.04,0.67],[-0.23,-1.23,-1.49,0.07]];_l0 ppEffectCommit 0;_l0 ppEffectAdjust[1,1,0,[0.01,0,0,-0.85],[0.15,0.18,0.04,0.67],[-0.23,-1.23,-1.49,0.07]];_l0 ppEffectCommit 3;

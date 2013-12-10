@@ -10,108 +10,71 @@ dayz_previousID = 0;
 
 //disable greeting menu 
 player setVariable ["BIS_noCoreConversations", true];
+//disable radio messages to be heard and shown in the left lower corner of the screen
 enableRadio false;
+// May prevent "how are you civillian?" messages from NPC
+enableSentences false;
 
 // DayZ Epoch config
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
+freshSpawn = 2; //0 - Normal Spawn / 1 - fresh spawn as zombie / 2 - fresh spawn as player
+DZE_FriendlySaving = true; //true - safe 5 most recent friendlies / false - disable
+dayz_spawnselection = 1; // DayZ Spawnselection / 1 = enabled // 0 = disabled, No current spawn limits.
+
 MaxHeliCrashes= 5; // Default = 5
-MaxVehicleLimit = 500; // Default = 50
-MaxDynamicDebris = 0; // Default = 100
-MaxAmmoBoxes = 0; // Default = 5
-MaxMineVeins = 0; // Default = 50
-dayz_MapArea = 10000; // Default = 10000
-dayz_animalDistance = 200;
-dayz_zSpawnDistance = 600;
-dayz_maxLocalZombies = 20; // Default = 30 
-dayz_maxGlobalZombiesInit = 10;
-dayz_maxGlobalZombiesIncrease = 5;
-dayz_maxZeds = 200;
-dayz_sellDistance = 7;
-dayz_paraSpawn = false;		// DOT NOT ENABLE currently bugged in Epoch
-spawnMarkerCount = 4; // Default: 4
+MaxVehicleLimit = 300; // Default = 50
+MaxDynamicDebris = 50; // Default = 100
+
+dayz_MapArea = 10000; // Default = 14000
+dayz_maxLocalZombies = 18; // Default = 30
+dayz_maxGlobalZombiesInit = 15; // Default = 15
+dayz_maxGlobalZombiesIncrease = 5; // Default = 5
+dayz_maxZeds = 300; // Default = 500
+dayz_paraSpawn = true;
+
+dayz_minpos = -1; //fix for Spawn on Coast after disconnect in a Car - Epoch 1.0.3 bug default 
+dayz_maxpos = 16000;
+
+dayz_sellDistance_vehicle = 10;
+dayz_sellDistance_boat = 30;
+dayz_sellDistance_air = 40;
+
 dayz_maxAnimals = 2; // Default: 8
 dayz_tameDogs = false;
-DynamicVehicleDamageLow = 15; // Default: 0
-DynamicVehicleDamageHigh = 90; // Default: 100
+DynamicVehicleDamageLow = 10; // Default: 0
+DynamicVehicleDamageHigh = 100; // Default: 100
+
 DZE_BuildingLimit = 300; //Max buildings within 30m
 
-
-EpochEvents = [
-["any","any","any","any",0,"crash_spawner"],
-["any","any","any","any",0,"crash_spawner"],
-["any","any","any","any",0,"supply_drop"]
-];
-
+EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
 
 //Load in compiled functions
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "skaronator\clientfiles\variables.sqf";
+//call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
+call compile preprocessFileLineNumbers "germandayz\client\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
 progressLoadingScreen 0.1;
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\publicEH.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "skaronator\clientfiles\publicEH.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\publicEH.sqf";				//Initilize the publicVariable event handlers
 progressLoadingScreen 0.2;
-call compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\setup_functions_med.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\setup_functions_med.sqf";	//Functions used by CLIENT for medical
 progressLoadingScreen 0.4;
-//EPOCH DEFAULT call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\compiles.sqf";  // Aenderung Andro
-call compile preprocessFileLineNumbers "germandayz\compiles.sqf";
+//call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\compiles.sqf";				//Compile regular functions
+call compile preprocessFileLineNumbers "germandayz\client\compiles.sqf";
 progressLoadingScreen 0.5;
-call compile preprocessFileLineNumbers "germandayz\server_traders.sqf";				//Compile trader configs
+call compile preprocessFileLineNumbers "server_traders.sqf";				//Compile trader configs
 progressLoadingScreen 1.0;
-	
+
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
-/* BIS_Effects_* fixes from Dwarden */
-BIS_Effects_EH_Killed = compile preprocessFileLineNumbers "\z\addons\dayz_code\system\BIS_Effects\killed.sqf";
-BIS_Effects_AirDestruction = compile preprocessFileLineNumbers "\z\addons\dayz_code\system\BIS_Effects\AirDestruction.sqf";
-BIS_Effects_AirDestructionStage2 = compile preprocessFileLineNumbers "\z\addons\dayz_code\system\BIS_Effects\AirDestructionStage2.sqf";
-
-BIS_Effects_globalEvent = {
-	BIS_effects_gepv = _this;
-	publicVariable "BIS_effects_gepv";
-	_this call BIS_Effects_startEvent;
-};
-
-BIS_Effects_startEvent = {
-	switch (_this select 0) do {
-		case "AirDestruction": {
-				[_this select 1] spawn BIS_Effects_AirDestruction;
-		};
-		case "AirDestructionStage2": {
-				[_this select 1, _this select 2, _this select 3] spawn BIS_Effects_AirDestructionStage2;
-		};
-		case "Burn": {
-				[_this select 1, _this select 2, _this select 3, false, true] spawn BIS_Effects_Burn;
-		};
-	};
-};
-
-"BIS_effects_gepv" addPublicVariableEventHandler {
-	(_this select 1) call BIS_Effects_startEvent;
-};
-
-if ((!isServer) && (isNull player) ) then {
-	waitUntil {!isNull player};
-	waitUntil {time > 3};
-};
-
-if ((!isServer) && (player != player)) then {
-	waitUntil {player == player};
-	waitUntil {time > 3};
-};
-
 if (isServer) then {
-	call compile preprocessFileLineNumbers "germandayz\dynamic_vehicle.sqf";				//Compile vehicle configs
+	call compile preprocessFileLineNumbers "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\dynamic_vehicle.sqf";//Compile vehicle configs
 	// Add trader citys
+	_nil = [] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf"; //former trader.sqf
 	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
-	_gdepoch = [] execVM "germandayz\trader.sqf";
 };
-	_gdepoch = [] execVM "germandayz\safezone\safezone.sqf";
-	//Clear Zeds
-	[[4063.4226, 11664.19, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Bash
-	[[11447.472, 11364.504, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Klen
-	[[12944.227,12766.889, 0],100] execVM "germandayz\safezone\clearZed.sqf"; //-> Hero
+
+//Clear Zeds and add Safezone
+[] execVM "germandayz\safezone\safezone.sqf";
 if (!isDedicated) then {
 	//Conduct map operations
 	0 fadeSound 0;
@@ -120,22 +83,33 @@ if (!isDedicated) then {
 	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
-	_void = [] execVM "R3F_Realism\R3F_Realism_Init.sqf";
-	/* CUSTOM STUFF SKARONATOR START */
-	player_build = compile preprocessFileLineNumbers "skaronator\clientfiles\player_build.sqf"; //Line#140  ->  dayz_characterID >> dayz_playerUID
-	player_unlockDoor = compile preprocessFileLineNumbers "skaronator\clientfiles\unlockDoor.sqf";
-	fn_gearMenuChecks = compile preprocessFileLineNumbers "skaronator\clientfiles\fn_gearMenuChecks.sqf";
-	fnc_usec_selfActions =	compile preprocessFileLineNumbers "skaronator\clientfiles\fn_selfActions.sqf";
+	player_build = compile preprocessFileLineNumbers "germandayz\client\player_build.sqf"; //Line#140  ->  dayz_characterID >> dayz_playerUID
+//	fn_gearMenuChecks = compile preprocessFileLineNumbers "germandayz\client\fn_gearMenuChecks.sqf";
+	fnc_usec_selfActions =		compile preprocessFileLineNumbers "germandayz\client\fn_selfActions.sqf";
+	fnc_usec_damageActions =	compile preprocessFileLineNumbers "germandayz\client\fn_damageActions.sqf";
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
-//	_skaro = [] execVM "germandayz\playerUI_effects.sqf";
-//	_skaro = [] execVM "germandayz\refuel\refuel_selfActions.sqf";
-	//Overwrite compiles.sqf //SKARONATOR
-	/* CUSTOM STUFF SKARONATOR END */
-		
+	
+// Anti Hack 
+//	if (true) then {
+//		[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+//	};
+
 	//Lights
-	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
-	};
-//#include "\z\addons\dayz_code\system\REsec.sqf"
+if (true) then {
+//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+};
+};
+
+//if (true) then {
+//	#include "\z\addons\dayz_code\system\REsec.sqf"
+//};
+
+//Start Dynamic Weather
+if(true) then {
+	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
+};
+//#include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
+
 //GD EDITS
 dayZ_serverName = "GD-RD3";
 if (!isNil "dayZ_serverName") then {
@@ -149,12 +123,21 @@ if (!isNil "dayZ_serverName") then {
 
 // Random Stuff
 [] execVM "germandayz\R3F\init.sqf";
-[] execVM "germandayz\missions\addmarkers.sqf";
-[] execVM "germandayz\missions\addmarkers75.sqf";
-//[] execVM "germandayz\missions\faction.sqf"; 
+//[] execVM "germandayz\missions\addmarkers.sqf";
+//[] execVM "germandayz\missions\addmarkers75.sqf";
 //Map Additions
 //[] execVM "germandayz\map\nwa.sqf";
 //[] execVM "germandayz\map\west_kamenka.sqf";
-call compile preprocessFileLineNumbers "germandayz\AI\UPSMON\scripts\Init_UPSMON.sqf";
-call compile preprocessfile "germandayz\AI\SHK_pos\shk_pos_init.sqf";
-[] execVM "germandayz\AI\SARGE\SAR_AI_init.sqf";
+//[] execVM "germandayz\map\bash_trader.sqf";
+[] execVM "germandayz\map\lumberjack.sqf";
+//call compile preprocessFileLineNumbers "germandayz\AI\UPSMON\scripts\Init_UPSMON.sqf";
+//call compile preprocessfile "germandayz\AI\SHK_pos\shk_pos_init.sqf";
+//[] execVM "germandayz\AI\SARGE\SAR_AI_init.sqf";
+
+//Experimental
+//Map Additions
+//[] execVM "\z\addons\dayz_server\germandayz\map\nea.sqf";
+//[] execVM "\z\addons\dayz_server\germandayz\map\west_kamenka.sqf";
+//call compile preprocessFileLineNumbers "\z\addons\dayz_server\germandayz\AI\UPSMON\scripts\Init_UPSMON.sqf";
+//call compile preprocessfile "\z\addons\dayz_server\germandayz\AI\SHK_pos\shk_pos_init.sqf";
+//[] execVM "\z\addons\dayz_server\germandayz\AI\SARGE\SAR_AI_init.sqf";

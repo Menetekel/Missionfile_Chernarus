@@ -1,1 +1,0 @@
-﻿call compile preprocessFile"R3F_Realism\R3F_Weight\R3F_Weight_Fnct.sqf";_l0=[]execVM"R3F_Realism\R3F_Weight\R3F_DoWeight.sqf";

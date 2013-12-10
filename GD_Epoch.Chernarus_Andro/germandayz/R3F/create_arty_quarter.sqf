@@ -1,1 +1,0 @@
-﻿[_this select 0]execVM"germandayz\R3F\R3F_ARTY\poste_commandement\creer_poste_commandement.sqf";

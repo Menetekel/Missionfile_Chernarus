@@ -1,1 +1,0 @@
-﻿_l0=createMarker["MainMarker",Ccoords];_l0 setMarkerColor"ColorBlue";_l0 setMarkerShape"ELLIPSE";_l0 setMarkerBrush"Grid";_l0 setMarkerSize[175,175];

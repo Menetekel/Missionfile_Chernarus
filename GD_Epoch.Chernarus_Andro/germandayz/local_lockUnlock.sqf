@@ -1,1 +1,0 @@
-﻿private["_l0","_l1"];_l0=_this select 0;_l1=_this select 1;if(local _l0)then{if(_l1)then{_l0 setVehicleLock"LOCKED";_l0 setVariable["R3F_LOG_disabled",true,true];}else{_l0 setVehicleLock"UNLOCKED";_l0 setVariable["R3F_LOG_disabled",false,true];};};

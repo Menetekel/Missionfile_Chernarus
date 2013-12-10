@@ -9,6 +9,8 @@
  * according to the same scheme as the existing ones, and to add a #include at the end of this current file.
  */
 
+// Einstellungen by Andro 
+ 
 /****** TOW WITH VEHICLE / REMORQUER AVEC VEHICULE ******/
 
 /*
@@ -17,14 +19,11 @@
 R3F_LOG_CFG_remorqueurs =
 [
 "TowingTractor",
-"HMMWV_Terminal_EP1",
-"Ural_UN_EP1",
-"M113Ambul_UN_EP1",
-"M1133_MEV_EP1",
 "tractorOld",
 "tractor",
 "Kamaz",
-"MTVR"
+"MTVR_DES_EP1",
+"Ural_UN_EP1"
 ];// e.g. : "MyTowingVehicleClassName1", "MyTowingVehicleClassName2"
 
 /*
@@ -45,7 +44,8 @@ R3F_LOG_CFG_objets_remorquables =
 "BTR40_TK_INS_EP1", 
 "BTR40_TK_GUE_EP1", 
 "BAF_Offroad_D", 
-"BAF_Offroad_W", 
+"BAF_Offroad_W",
+"HMMWV_Terminal_EP1",
 "HMMWV_M998A2_SOV_DES_EP1_DZE",
 "HMMWV_M1151_M2_CZ_DES_EP1_DZE",
 "LandRover_MG_TK_EP1_DZE",
@@ -225,16 +225,19 @@ R3F_LOG_CFG_transporteurs =
 [
 ["Ural_CDF",90],
 ["Ural_UN_EP1",90],
-["M113Ambul_UN_EP1",1000],
-["M1133_MEV_EP1",1000],
 ["UralOpen_CDF",90], 
 ["Ural_TK_CIV_EP1",90],
-["Ural_UN_EP1",90],
 ["V3S_Open_TK_CIV_EP1",90],
 ["V3S_Open_TK_EP1",90],
 ["Kamaz",90],
-["MTVR",90],
 ["MTVR_DES_EP1",90],
+["V3S_Civ",90],
+["V3S_TK_EP1_DZE",90],
+["V3S_RA_TK_GUE_EP1_DZE",90],
+["UralCivil_DZE",90],
+["UralCivil2_DZE",90],
+["KamazOpen_DZE",90],
+["MTVR",90],
 ["BAF_Merlin_HC3_D",30],
 ["CH_47F_EP1_DZE",40],
 ["AN2_DZ",10],
