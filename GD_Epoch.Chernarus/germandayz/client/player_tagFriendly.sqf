@@ -6,16 +6,12 @@ _action = _this select 2;
 call fnc_usec_medic_removeActions;
 r_action = false;
 
-_callerID = _caller getVariable "CharacterID";
-_targetID = _target getVariable "CharacterID";
-
-//_callerID = getPlayerUID _caller;
-//_targetID = getPlayerUID _target;
+_callerID = _caller getVariable "dayz_playerUID";
+_targetID = _target getVariable "dayz_playerUID";
 
 _friendlies = _caller getVariable ["friendlies", []];
 _friendlies set [count _friendlies, _targetID];
 _caller setVariable ["friendlies", _friendlies, true];
-	 diag_log format["DEBUG FRIENDLYTAG:  Caller: %1 Target: %2 Friendlies: %3", _callerID, _targetID, _friendlies];
 
 _rfriendlies = _target getVariable ["friendlies", []];
 

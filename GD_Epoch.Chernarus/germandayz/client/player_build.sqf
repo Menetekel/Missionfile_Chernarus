@@ -8,7 +8,7 @@ if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , 
 DZE_ActionInProgress = true;
 
 // disallow building if too many objects are found within 30m
-if((count ((getPosATL player) nearObjects ["All",30])) >= DZE_BuildingLimit) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_41"), "PLAIN DOWN"];};
+if((count ((position player) nearObjects ["All",30])) >= DZE_BuildingLimit) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_41"), "PLAIN DOWN"];};
 
 _onLadder =		(getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1;
 _isWater = 		dayz_isSwimming;
@@ -57,7 +57,7 @@ _needNear = 	getArray (configFile >> "CfgMagazines" >> _item >> "ItemActions" >>
 	switch(_need) do{
 		case "fire":
 		{
-			_isNear = {inflamed _x} count (getPosATL player nearObjects _distance);
+			_isNear = {inflamed _x} count (position player nearObjects _distance);
 			if(_isNear == 0) then {  
 				_abort = true;
 				_reason = "fire";
@@ -99,7 +99,7 @@ if(isNumber (configFile >> "CfgVehicles" >> _classname >> "lockable")) then {
 	_lockable = getNumber(configFile >> "CfgVehicles" >> _classname >> "lockable");
 };
 
-_requireplot = DZE_requireplot;
+_requireplot = 1;
 if(isNumber (configFile >> "CfgVehicles" >> _classname >> "requireplot")) then {
 	_requireplot = getNumber(configFile >> "CfgVehicles" >> _classname >> "requireplot");
 };
@@ -137,7 +137,7 @@ _findNearestPole = [];
 _IsNearPlot = count (_findNearestPole);
 
 // If item is plot pole and another one exists within 45m
-if(_isPole and _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_44") , "PLAIN DOWN"]; };
+if(_isPole and _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText ["Cannot build plot pole within 60m of an existing plot.", "PLAIN DOWN"]; };
 
 if(_IsNearPlot == 0) then {
 
@@ -165,10 +165,12 @@ if(_IsNearPlot == 0) then {
 		};
 
 	} else {
+		{
+		if((_ownerID == getPlayerUID _x) && (isPlayer _x)) then {_ownerID = _x getVariable "CharacterID"};
+		} forEach playableunits;
 		// disallow building plot
 		if(!_isPole) then {
 			_friendlies		= player getVariable ["friendlyTo",[]];
-			diag_log format["DEBUG FriendlyBuilding: Owner: %1 Friendlies: %2", _ownerID, _friendlies];
 			// check if friendly to owner
 			if(_ownerID in _friendlies) then {
 				_canBuildOnPlot = true;
@@ -469,9 +471,9 @@ if (_hasrequireditem) then {
 		if (_proceed) then {
 	
 			_num_removed = ([player,_item] call BIS_fnc_invRemove);
-			if (_classname in ["CinderWall_DZ","Land_HBarrier5_DZ","Plastic_Pole_EP1_DZ","Land_HBarrier3_DZ","Land_HBarrier1_DZ","MetalPanel_DZ","MetalFloor_DZ","CinderWallDoorSmallLocked_DZ","CinderWallDoorLocked_DZ"]) then {
-				_tmpbuilt addEventHandler ["HandleDamage", {false}];
-				_tmpbuilt enableSimulation false;
+			if (_classname in ["Plastic_Pole_EP1_DZ","Land_HBarrier3_DZ","Land_HBarrier1_DZ","MetalPanel_DZ","MetalFloor_DZ","CinderWallDoorSmallLocked_DZ","CinderWallDoorLocked_DZ"]) then {
+			_tmpbuilt addEventHandler ["HandleDamage", {false}];
+			_tmpbuilt enableSimulation false;
 			};
 			//diag_log format["Add while Building a Godmode for Obj: %1", _tmpbuilt];
 			if(_num_removed == 1) then {

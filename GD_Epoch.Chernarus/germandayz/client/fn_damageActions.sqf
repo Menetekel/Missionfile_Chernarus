@@ -173,7 +173,6 @@ if (!isNull _menClose and _hasPatient and !r_drag_sqf and !r_action and !_inVehi
 		// should only fire if cursor target is man and not vehicle
 		if ((isPlayer _unit) and !(_charID in _friendlies)) then {
 			r_action = true;
-			//_action = _unit addAction ["Tag as friendly", "\z\addons\dayz_code\actions\player_tagFriendly.sqf", [], 0, false, true, "", ""];
 			_action = _unit addAction ["Tag as friendly", "germandayz\client\player_tagFriendly.sqf", [], 0, false, true, "", ""];
 			r_player_actions set [count r_player_actions,_action];
 		};
