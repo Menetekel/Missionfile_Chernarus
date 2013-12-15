@@ -9,13 +9,9 @@ r_action = false;
 _callerID = _caller getVariable "CharacterID";
 _targetID = _target getVariable "CharacterID";
 
-//_callerID = getPlayerUID _caller;
-//_targetID = getPlayerUID _target;
-
 _friendlies = _caller getVariable ["friendlies", []];
 _friendlies set [count _friendlies, _targetID];
 _caller setVariable ["friendlies", _friendlies, true];
-	 diag_log format["DEBUG FRIENDLYTAG:  Caller: %1 Target: %2 Friendlies: %3", _callerID, _targetID, _friendlies];
 
 _rfriendlies = _target getVariable ["friendlies", []];
 

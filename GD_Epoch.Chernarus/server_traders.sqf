@@ -20,7 +20,7 @@ menu_Rocker4 = [
 ];
 // Friendly Vehicles
 menu_Profiteer4 = [
-	[["Bikes and ATV",608],["Buses and Vans",563],["Cargo Trucks",564],["Fuel Trucks",492],["Military Unarmed",491],["Trucks",495],["Used Cars",585],["Utility Vehicles",565],["Towing Vehicles",693]],
+	[["Bikes and ATV",608],["Buses and Vans",563],["Cargo Trucks",564],["Fuel Trucks",492],["Military Unarmed",491],["Trucks",495],["Used Cars",585],["Utility Vehicles",565],["Towing Vehicles",693],["Special Items",694]],
 	[],
 	"friendly"
 ];
@@ -62,7 +62,7 @@ menu_Worker2 = [
 ];
 // Vehicles Neutral
 menu_Worker3 = [
-	[["Bikes and ATV",587],["Buses and Vans",588],["Cargo Trucks",586],["Fuel Trucks",589],["Military Unarmed",598],["Trucks",590],["Used Cars",520],["Utility Vehicles",591],["Towing Vehicles",693]],
+	[["Bikes and ATV",587],["Buses and Vans",588],["Cargo Trucks",586],["Fuel Trucks",589],["Military Unarmed",598],["Trucks",590],["Used Cars",520],["Utility Vehicles",591],["Towing Vehicles",693],["Special Items",694]],
 	[],
 	"neutral"
 ];

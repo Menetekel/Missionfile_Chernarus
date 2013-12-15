@@ -15,7 +15,7 @@ class Mission
 		"cacharacters_pmc",
 		"ca_modules_functions",
 		"glt_m300t",
-		"pook_h13",
+		"pook_h13",		
 		"csj_gyroac",
 		"map_eu",
 		"jetskiyanahuiaddon"
@@ -1245,7 +1245,7 @@ class Mission
 			name="BoatDealerSouth";
 			text="Boat Dealer - PVP ALLOWED";
 			type="mil_dot";
-			colorName="ColorBlack";
+			colorName="ColorRed";
 		};
 		class Item11
 		{
@@ -1261,7 +1261,7 @@ class Mission
 			name="BanditDen";
 			text="Bandit Camp - PVP ALLOWED";
 			type="mil_dot";
-			colorName="ColorPink";
+			colorName="ColorRed";
 		};
 		class Item13
 		{
@@ -1277,7 +1277,7 @@ class Mission
 			name="BoatDealerEast";
 			text="Boat Dealer - PVP ALLOWED";
 			type="mil_dot";
-			colorName="ColorBlack";
+			colorName="ColorRed";
 		};
 		class Item15
 		{
@@ -1286,7 +1286,6 @@ class Mission
 			text="Trader City Bash - SAFEZONE";
 			type="mil_circle";
 			colorName="ColorGreen";
-			fillName="Grid";
 		};
 		class Item16
 		{
@@ -1331,7 +1330,7 @@ class Mission
 			fillName="Grid";
 			a=100;
 			b=100;
-		};
+		};		
 	};
 	class Sensors
 	{
@@ -1398,8 +1397,8 @@ class Mission
 			age="UNKNOWN";
 			name="zonebandit";
 			expCond="(player distance zonebandit) < 100;";
-			expActiv="canbuild = false; inSafeZone = true; inTraderCity = ""Bandit Trader"";";
-			expDesactiv="canbuild = true; inSafeZone = false; inTraderCity = ""Any"";";
+			expActiv="canbuild = false; inTraderCity = ""Bandit Trader"";";
+			expDesactiv="canbuild = true; inTraderCity = ""Any"";";
 			class Effects
 			{
 			};
@@ -1437,7 +1436,7 @@ class Mission
 			class Effects
 			{
 			};
-		};
+		};		
 	};
 };
 class Intro
