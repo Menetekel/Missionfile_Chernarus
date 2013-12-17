@@ -24,9 +24,9 @@ dayz_spawnselection = 1; // DayZ Spawnselection / 1 = enabled // 0 = disabled, N
 
 MaxHeliCrashes= 5; // Default = 5
 MaxVehicleLimit = 300; // Default = 50
-MaxDynamicDebris = 50; // Default = 100
+MaxDynamicDebris = 25; // Default = 100
 
-dayz_MapArea = 10000; // Default = 14000
+dayz_MapArea = 14000; // Default = 14000
 dayz_maxLocalZombies = 18; // Default = 30
 dayz_maxGlobalZombiesInit = 15; // Default = 15
 dayz_maxGlobalZombiesIncrease = 5; // Default = 5
@@ -84,7 +84,6 @@ if (!isDedicated) then {
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	player_build = compile preprocessFileLineNumbers "germandayz\client\player_build.sqf"; //Line#140  ->  dayz_characterID >> dayz_playerUID
-//	fn_gearMenuChecks = compile preprocessFileLineNumbers "germandayz\client\fn_gearMenuChecks.sqf";
 	fnc_usec_selfActions =		compile preprocessFileLineNumbers "germandayz\client\fn_selfActions.sqf";
 	fnc_usec_damageActions =	compile preprocessFileLineNumbers "germandayz\client\fn_damageActions.sqf";
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
@@ -120,24 +119,6 @@ if (!isNil "dayZ_serverName") then {
 		((uiNamespace getVariable "wm_disp") displayCtrl 1) ctrlSetText dayZ_serverName;
 	};
 };
-
-// Random Stuff
 [] execVM "germandayz\R3F\init.sqf";
 //[] execVM "germandayz\missions\addmarkers.sqf";
 //[] execVM "germandayz\missions\addmarkers75.sqf";
-//Map Additions
-//[] execVM "germandayz\map\nwa.sqf";
-//[] execVM "germandayz\map\west_kamenka.sqf";
-//[] execVM "germandayz\map\bash_trader.sqf";
-[] execVM "germandayz\map\lumberjack.sqf";
-//call compile preprocessFileLineNumbers "germandayz\AI\UPSMON\scripts\Init_UPSMON.sqf";
-//call compile preprocessfile "germandayz\AI\SHK_pos\shk_pos_init.sqf";
-//[] execVM "germandayz\AI\SARGE\SAR_AI_init.sqf";
-
-//Experimental
-//Map Additions
-//[] execVM "\z\addons\dayz_server\germandayz\map\nea.sqf";
-//[] execVM "\z\addons\dayz_server\germandayz\map\west_kamenka.sqf";
-//call compile preprocessFileLineNumbers "\z\addons\dayz_server\germandayz\AI\UPSMON\scripts\Init_UPSMON.sqf";
-//call compile preprocessfile "\z\addons\dayz_server\germandayz\AI\SHK_pos\shk_pos_init.sqf";
-//[] execVM "\z\addons\dayz_server\germandayz\AI\SARGE\SAR_AI_init.sqf";

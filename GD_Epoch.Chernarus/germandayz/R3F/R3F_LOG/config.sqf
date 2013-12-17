@@ -271,9 +271,7 @@ R3F_LOG_CFG_objets_remorquables =
  * List of class names of air vehicles which can lift liftables objects.
  */
 R3F_LOG_CFG_heliporteurs =
-[
-"BAF_Merlin_HC3_D",
-"CH_47F_EP1_DZE"        
+[      
 ]; // e.g. : "MyLifterVehicleClassName1", "MyLifterVehicleClassName2"
 
 /*
