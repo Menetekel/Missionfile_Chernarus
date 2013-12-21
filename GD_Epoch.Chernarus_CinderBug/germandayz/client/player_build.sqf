@@ -121,7 +121,7 @@ _distance = 30;
 _needText = localize "str_epoch_player_246";
 
 if(_isPole) then {
-	_distance = 60;
+	_distance = 45;
 };
 
 // check for near plot
@@ -155,7 +155,7 @@ if(_IsNearPlot == 0) then {
 	// Find owner 
 	_ownerID = _nearestPole getVariable["CharacterID","0"];
 
-	// diag_log format["DEBUG BUILDING: %1 = %2", dayz_playerUID, _ownerID];
+	// diag_log format["DEBUG BUILDING: %1 = %2", dayz_characterID, _ownerID];
 
 	// check if friendly to owner
 	if(dayz_playerUID == _ownerID) then {  //Keep ownership
@@ -167,7 +167,8 @@ if(_IsNearPlot == 0) then {
 	} else {
 		// disallow building plot
 		if(!_isPole) then {
-			_friendlies		= player getVariable ["friendlyTo",[]];
+//			_friendlies		= player getVariable ["friendlyTo",[]];
+			_friendlies		= player getVariable ["friendlies",[]];
 			// check if friendly to owner
 			if(_ownerID in _friendlies) then {
 				_canBuildOnPlot = true;
@@ -468,9 +469,9 @@ if (_hasrequireditem) then {
 		if (_proceed) then {
 	
 			_num_removed = ([player,_item] call BIS_fnc_invRemove);
-			if (_classname in ["CinderWall_DZ","Land_HBarrier5_DZ","Plastic_Pole_EP1_DZ","Land_HBarrier3_DZ","Land_HBarrier1_DZ","MetalPanel_DZ","MetalFloor_DZ","CinderWallDoorSmallLocked_DZ","CinderWallDoorLocked_DZ"]) then {
-				_tmpbuilt addEventHandler ["HandleDamage", {false}];
-				_tmpbuilt enableSimulation false;
+			if (_classname in ["Plastic_Pole_EP1_DZ","Land_HBarrier5_DZ","Land_HBarrier3_DZ","Land_HBarrier1_DZ","MetalFloor_DZ","CinderWallDoorSmallLocked_DZ","CinderWallDoorLocked_DZ"]) then {
+			_tmpbuilt addEventHandler ["HandleDamage", {false}];
+			_tmpbuilt enableSimulation false;
 			};
 			//diag_log format["Add while Building a Godmode for Obj: %1", _tmpbuilt];
 			if(_num_removed == 1) then {

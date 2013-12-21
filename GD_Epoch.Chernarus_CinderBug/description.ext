@@ -13,7 +13,10 @@ debriefing = 0;
 
 onPauseScript = "";
 loadScreen = "germandayz\load.jpg";
+//germandayz.de
 #include "germandayz\R3F\desc_include.h"
+//#include "germandayz\AI\SARGE\SAR_define.hpp"
+
 class Header
 {
  gameType = COOP;            //DM, Team, Coop, ...
