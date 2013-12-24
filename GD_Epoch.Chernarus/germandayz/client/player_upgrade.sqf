@@ -150,8 +150,8 @@ if ((count _upgrade) > 0) then {
 			// Set location
 			_object setPosATL _location;
 
-			if (_classname in ["CinderWall_DZ","Land_HBarrier5_DZ","Plastic_Pole_EP1_DZ","Land_HBarrier3_DZ","Land_HBarrier1_DZ","MetalPanel_DZ","MetalFloor_DZ","CinderWallDoorSmallLocked_DZ","CinderWallDoorLocked_DZ"]) then {
-			_object addEventHandler ["HandleDamage", {false}];
+			if (_classname in ["CinderWall_DZ","Land_HBarrier5_DZ","Plastic_Pole_EP1_DZ","Land_HBarrier3_DZ","Land_HBarrier1_DZ","MetalFloor_DZ","CinderWallDoorSmallLocked_DZ","CinderWallDoorLocked_DZ"]) then {
+			_object addEventHandler ["HandleDamage", {false}]; //add god
 			_object enableSimulation false;
 			};
 			if (_lockable == 3) then {
