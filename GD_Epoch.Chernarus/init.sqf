@@ -19,12 +19,16 @@ enableSentences false;
 spawnShoremode = 1; // Default = 1 (on shore)
 spawnArea= 1500; // Default = 1500
 freshSpawn = 2; //0 - Normal Spawn / 1 - fresh spawn as zombie / 2 - fresh spawn as player
+DZE_BuildingLimit = 300; //Max buildings within 30m
 DZE_FriendlySaving = true; //true - safe 5 most recent friendlies / false - disable
 MaxHeliCrashes= 5; // Default = 5
 MaxVehicleLimit = 300; // Default = 50
 MaxDynamicDebris = 50; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 30; // Default = 30 
+
+
+
 
 dayz_paraSpawn = true;
 
@@ -43,6 +47,14 @@ DynamicVehicleDamageHigh = 100; // Default: 100
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
 
+
+
+
+
+
+
+
+
 //Load in compiled functions
 //call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
 call compile preprocessFileLineNumbers "germandayz\client\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
@@ -59,16 +71,22 @@ progressLoadingScreen 1.0;
 
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
+
+
+
 if (isServer) then {
-	call compile preprocessFileLineNumbers "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\dynamic_vehicle.sqf";
 	//Compile vehicle configs
-	
+	call compile preprocessFileLineNumbers "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\dynamic_vehicle.sqf";
 	// Add trader citys
-	_nil = [] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf";
+//	_nil = [] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf";
+	_nil = [] execVM "\z\addons\dayz_server\missions\rd5.Chernarus\mission.sqf";
+
+
+
+
+
 	_serverMonitor = 	[] execVM "\z\addons\dayz_code\system\server_monitor.sqf";
 };
-
-//Clear Zeds and add Safezone
 [] execVM "germandayz\safezone\safezone.sqf";
 if (!isDedicated) then {
 	//Conduct map operations
@@ -79,23 +97,23 @@ if (!isDedicated) then {
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
-	player_build = compile preprocessFileLineNumbers "germandayz\client\player_build.sqf"; //Line#140  ->  dayz_characterID >> dayz_playerUID
+	player_build = compile preprocessFileLineNumbers "germandayz\client\player_build.sqf";
 	fnc_usec_selfActions =		compile preprocessFileLineNumbers "germandayz\client\fn_selfActions.sqf";
-//	fnc_usec_damageActions =	compile preprocessFileLineNumbers "germandayz\client\fn_damageActions.sqf";
-		
+
 	//anti Hack
 	//[] execVM "\z\addons\dayz_code\system\antihack.sqf";
 
 	//Lights
 	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
-	
+
 };
-
 #include "\z\addons\dayz_code\system\REsec.sqf"
-
 //Start Dynamic Weather
 execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
+
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
+
+
 //GD EDITS
 dayZ_serverName = "GD-RD3";
 if (!isNil "dayZ_serverName") then {
@@ -106,5 +124,6 @@ if (!isNil "dayZ_serverName") then {
 		((uiNamespace getVariable "wm_disp") displayCtrl 1) ctrlSetText dayZ_serverName;
 	};
 };
+
 
 [] execVM "germandayz\R3F\init.sqf";
